@@ -1,0 +1,24 @@
+def selection_sort(arr, reverse=False):
+    """
+    ترتيب بمبدأ Selection Sort (بالمكان - in-place).
+    arr: قائمة أرقام أو عناصر قابلة للمقارنة
+    reverse: لو True يرتب من الأكبر للأصغر، أما False فيرتب من الأصغر للأكبر
+    """
+    n = len(arr)
+    for i in range(n - 1):
+        # افترض أن العنصر الحالي هو الأفضل (أصغر أو أكبر حسب reverse)
+        best_idx = i
+        for j in range(i + 1, n):
+            if (not reverse and arr[j] < arr[best_idx]) or (reverse and arr[j] > arr[best_idx]):
+                best_idx = j
+        # لو وجدنا عنصر "أفضل" نبدله مع موقع i
+        if best_idx != i:
+            arr[i], arr[best_idx] = arr[best_idx], arr[i]
+    return arr
+
+# تجربة:
+data = [64, 25, 12, 22, 11]
+print("قبل:", data)
+sorted_data = selection_sort(data.copy())            # ترتيب تصاعدي
+print("بعد (تصاعدي):", sorted_data)
+print("بعد (تنازلي):", selection_sort(data.copy(), reverse=True))
